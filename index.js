@@ -1,30 +1,29 @@
 import express from "express";
+import productsRouter from "./src/routes/products.router.js";
+import usersRouter from "./src/routes/users.router.js";
 const app = express();
+const PORT = 3000;
 
-const products = [
-  { id: 1, name: "Producto 1", price: 10 },
-  { id: 2, name: "Producto 2", price: 20 },
-  { id: 3, name: "Producto 3", price: 30 },
-];
-app.use((req, res, next) => {
-  console.log(`${req.method} ${req.url}`);
-  next();
+app.use(express.json());
+
+app.listen(PORT, () => {
+  console.log(`http://localhost:${PORT}`);
 });
+
+
 app.get("/", (req, res) => {
-  res.send("Hola Mundo!");
-});
-app.get("/products", (req, res) => {
-  res.send(products);
-}); 
-app.use((req, res) => {
-  res.status(404).send("Página no encontrada");
-});
-app.get("/products/:id", (req, res) => {
-  const product = products.find(p => p.id === parseInt(req.params.id));
-  if (!product) {
-    return res.status(404).send("Producto no encontrado");
-  }
-  res.send(product);
+  res.send(`
+    <h1>API de productos</h1>
+    <p>Servidor funcionando correctamente</p>
+  `);
 });
 
-app.listen(3000, () => console.log("http://localhost: 3000"));
+app.use (`/api/products`, productsRouter);
+app.use ( usersRouter);
+
+app.get("/up", (req, res) => {
+  res.json({ 
+    status: "ok", 
+    message: "Servidor activo" })
+  });     
+    
