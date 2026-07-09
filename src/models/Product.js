@@ -3,11 +3,12 @@ import db from "../config/firebase.js";
 import { collection, doc, getDoc, getDocs, addDoc, updateDoc, deleteDoc } from "firebase/firestore"; 
 
 const productsCollection = collection(db, "products");
+
 export const createProduct = async (product) => {
     const productRef = await addDoc(productsCollection, product)
     return {
         id: productRef.id,
-        ...product,
+        ...product
     };
 };
 export const getProducts = async () => {

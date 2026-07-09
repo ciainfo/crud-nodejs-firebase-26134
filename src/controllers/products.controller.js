@@ -38,7 +38,7 @@ export const createProduct = async (req, res) => {
     title, 
     price,
     stock,  
-    description  
+    description, 
     //categoryId,
   });  
 
@@ -47,16 +47,18 @@ export const createProduct = async (req, res) => {
     return res.status(404).json({ 
         message: "Categoría no valida" });
   });
+  
   products.push(newProduct);
   */
-  res.status(201).json(newProduct);
+  console.log(newProduct);
+  console.log(res.status(201).json(newProduct));
 };
 
 export const updateProduct = async (req, res) => {
-  const {id} = req.params;
+  const { id } = req.params;
   const { title, price, stock, description } = req.body;
   if (!title || !price || !stock || !description /* || categoryId*/) {
-    return res.status(422).json({ 
+    return res.status(400).json({ 
         message: "Faltan datos obligatorios",
     });
   }

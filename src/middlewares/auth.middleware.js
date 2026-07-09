@@ -25,7 +25,8 @@ export const auth = (req, res, next) => {
             message: "Token invalido o expirado",
         });
     }
-    console.log("Token recibido:", authHeader);
-    res.send('DEV: Token recibido correctamente');
+    //console.log("Token recibido:", authHeader);
+    //res.send('DEV: Token recibido correctamente');
+    
 };
     
