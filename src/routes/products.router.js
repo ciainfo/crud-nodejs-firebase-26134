@@ -8,11 +8,12 @@ import {
     deleteProduct,
     
 } from "../controllers/products.controller.js";
+import { auth } from "../middlewares/auth.middleware.js";
 
+router.post("/", auth, createProduct);
 router.get("/", getProducts);
 router.get("/:id", getProductById);
-router.post("/", createProduct);
-router.put("/:id", updateProduct);
-router.delete("/:id", deleteProduct);
+router.put("/:id", auth, updateProduct);
+router.delete("/:id", auth, deleteProduct);
 
 export default router;

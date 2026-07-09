@@ -3,6 +3,13 @@ import db from "../config/firebase.js";
 import { collection, doc, getDoc, getDocs, addDoc, updateDoc, deleteDoc } from "firebase/firestore"; 
 
 const productsCollection = collection(db, "products");
+export const createProduct = async (product) => {
+    const productRef = await addDoc(productsCollection, product)
+    return {
+        id: productRef.id,
+        ...product,
+    };
+};
 export const getProducts = async () => {
     const snapshot = await getDocs(productsCollection);
     
@@ -29,14 +36,6 @@ export const getProductById = async (id) => {
         ...snapshot.data(),
     };
 };  
-
-export const createProduct = async (product) => {
-    const productRef = await addDoc(productsCollection, product)
-    return {
-        id: productRef.id,
-        ...product,
-    };
-};
 
 export const updateProduct = async (id, product) => {
     const productRef = doc(productsCollection, id);

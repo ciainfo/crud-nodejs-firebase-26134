@@ -3,11 +3,8 @@
 ## Create Product
 
 method: POST
-
 endpoint: /api/products
-
 body: 
-
 ```json
 {
   "name": "Product Name",
@@ -15,7 +12,6 @@ body:
 }
 ```
 response:
-
 ```json
 {
   "id": 1,
@@ -23,14 +19,13 @@ response:
   "price": 100.00
 }
 ```
-status: 201 
 
+status: 201
 ## Error Create Product
-
 method: POST
 endpoint: /api/products
-body: 
 
+body: 
 ```json
 {
   "name": "Producto 1",
@@ -38,13 +33,11 @@ body:
 }
 ```
 response:
-
 ```json
 {
   "error": "El campo price es requerido "
 }
 ```
-
 status: 422 
 
 # Get All Products

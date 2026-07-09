@@ -1,6 +1,6 @@
 export const createCategory = (req, res) => {
     const { title } = req.body;
-    res.json({
+    res.status(201).json({
         message: `Categoría creada: ${title}`,
     });
 };

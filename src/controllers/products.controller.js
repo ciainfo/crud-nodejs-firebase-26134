@@ -1,13 +1,7 @@
-const products = [
-  { id: 1, name: "Mouse", price: 12000 },
-  { id: 2, name: "Teclado", price: 25000 },
-  { id: 3, name: "Monitor", price: 150000 },
-];
-
 import { 
+  createProduct as createProductModel,
   getProducts as getProductsModel, 
   getProductById as getProductByIdModel,
-  createProduct as createProductModel,
   updateProduct as updateProductModel,
   deleteProduct as deleteProductModel,
 } from "../models/Product.js";
@@ -34,16 +28,17 @@ export const getProductById = async(req, res) => {
 };
 
 export const createProduct = async (req, res) => {
-  const { name, price, stock } = req.body;
-  if (!name || !price || !stock /* || categoryId*/) {
+  const { title, price, stock, description } = req.body;
+  if (!title || !price || !stock || !description /* || categoryId*/) {
     return res.status(422).json({ 
         message: "Faltan datos obligatorios",
     });
   } 
   const newProduct = await createProductModel({
-    name, 
+    title, 
     price,
-    stock,    
+    stock,  
+    description  
     //categoryId,
   });  
 
@@ -59,16 +54,17 @@ export const createProduct = async (req, res) => {
 
 export const updateProduct = async (req, res) => {
   const {id} = req.params;
-  const { name, price, stock } = req.body;
-  if (!name || !price || !stock /* || categoryId*/) {
+  const { title, price, stock, description } = req.body;
+  if (!title || !price || !stock || !description /* || categoryId*/) {
     return res.status(422).json({ 
         message: "Faltan datos obligatorios",
     });
   }
   const updatedProduct = await updateProductModel(id, { 
-    name, 
+    title, 
     price, 
     stock,
+    description,
    //categoryId});
   }); 
   if (!updatedProduct) {
